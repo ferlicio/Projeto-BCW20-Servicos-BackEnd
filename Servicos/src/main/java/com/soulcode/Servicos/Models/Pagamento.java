@@ -18,7 +18,7 @@ public class Pagamento {
     private String formPagamento;
 
     @Enumerated(EnumType.STRING)
-    private StatusPagamento status;
+    private StatusPagamento statusPagamento;
 
     public Integer getIdPagamento() {
         return idPagamento;
@@ -44,11 +44,11 @@ public class Pagamento {
         this.formPagamento = formPagamento;
     }
 
-    public StatusPagamento getStatus() {
-        return status;
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
     }
 
-    public void setStatus(StatusPagamento status) {
-        this.status = status;
+    public void setStatusPagamento(StatusPagamento statusPagamento) {
+        this.statusPagamento = statusPagamento;
     }
 }

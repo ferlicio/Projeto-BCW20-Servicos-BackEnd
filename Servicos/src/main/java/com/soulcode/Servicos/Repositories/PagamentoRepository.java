@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PagamentoRepository extends JpaRepository<Pagamento,Integer> {
 
-    @Query(value = "SELECT * FROM pagamento WHERE status = :status", nativeQuery = true)
+    @Query(value = "SELECT * FROM pagamento WHERE pagamento_status = :status", nativeQuery = true)
     List<Pagamento> findByStatus(String status);
 
 
