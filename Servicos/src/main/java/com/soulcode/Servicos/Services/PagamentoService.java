@@ -38,7 +38,7 @@ public class PagamentoService {
         Optional<Chamado> chamado = chamadoRepository.findById(idChamado);
         if (chamado.isPresent()){
             pagamento.setIdPagamento(idChamado);
-            pagamento.setStatus(StatusPagamento.LANCADO);
+            pagamento.setStatusPagamento(StatusPagamento.LANCADO);
             pagamentoRepository.save(pagamento);
 
             chamado.get().setPagamento(pagamento);
@@ -59,10 +59,10 @@ public class PagamentoService {
 
         switch (status){
             case "LANCADO":
-                pagamento.setStatus(StatusPagamento.LANCADO);
+                pagamento.setStatusPagamento(StatusPagamento.LANCADO);
                 break;
             case "QUITADO":
-                pagamento.setStatus(StatusPagamento.QUITADO);
+                pagamento.setStatusPagamento(StatusPagamento.QUITADO);
                 break;
         }
         return pagamentoRepository.save(pagamento);

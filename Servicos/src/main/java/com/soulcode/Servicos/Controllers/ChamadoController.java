@@ -1,6 +1,7 @@
 package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.Chamado;
+import com.soulcode.Servicos.Repositories.ChamadoRepository;
 import com.soulcode.Servicos.Services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,6 +20,9 @@ public class ChamadoController {
 
     @Autowired
     ChamadoService chamadoService;
+
+    @Autowired
+    ChamadoRepository chamadoRepository;
 
     @GetMapping("/chamados")
     public List<Chamado> mostrarTodosChamados(){
@@ -103,5 +107,19 @@ public class ChamadoController {
         chamadoService.modificarStatus(idChamado,status);
         return ResponseEntity.noContent().build();
     }
+
+
+    //CARD 29 - CHAMANDOS LANCADOS
+    @GetMapping("/chamadosLancados")
+    public List<Object> chamadosLancados(){
+        return this.chamadoRepository.chamadosLancados();
+    }
+
+    //CARD 30 - CHAMADOS QUITADOS
+    @GetMapping("/chamadosQuitados")
+    public List<Object> chamadosQuitados(){
+        return this.chamadoRepository.chamadosQuitados();
+    }
+
 
 }

@@ -51,7 +51,6 @@ public class FuncionarioController {
         URI novaUri = ServletUriComponentsBuilder.fromCurrentRequest().path("id")
                 .buildAndExpand(funcionario.getIdFuncionario()).toUri(); // funcionarios/31
         return ResponseEntity.created(novaUri).body(funcionario);
-
     }
 
     @DeleteMapping("/funcionarios/{idFuncionario}")
