@@ -1,6 +1,8 @@
 package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.Funcionario;
+import com.soulcode.Servicos.Repositories.ChamadoRepository;
+import com.soulcode.Servicos.Repositories.FuncionarioRepository;
 import com.soulcode.Servicos.Services.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ public class FuncionarioController {
 
     @Autowired
     FuncionarioService funcionarioService;
+
+    @Autowired
+    FuncionarioRepository funcionarioRepository;
 
     @GetMapping("/funcionarios")
     public List<Funcionario> mostrarTodosFuncionarios(){
@@ -66,6 +71,15 @@ public class FuncionarioController {
         funcionarioService.editarFuncionario(funcionario);
         return ResponseEntity.ok().body(funcionario);
     }
+
+// Card 27 Back-End
+@GetMapping("/funcionarioSemFoto")
+public List<Object> findByFuncionarioSemFoto(){
+
+    return this.funcionarioRepository.findByFuncionarioSemFoto();
+}
+
+
 
 
 }
