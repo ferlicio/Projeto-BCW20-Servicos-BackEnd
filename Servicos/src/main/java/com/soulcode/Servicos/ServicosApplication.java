@@ -12,6 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ServicosApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(ServicosApplication.class, args);
+		/*System.out.println(new BCryptPasswordEncoder().encode("batata"));*/
 	}
+
+
 }

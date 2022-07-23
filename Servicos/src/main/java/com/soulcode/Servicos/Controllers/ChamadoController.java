@@ -112,12 +112,14 @@ public class ChamadoController {
     //CARD 29 - CHAMANDOS LANCADOS
     @GetMapping("/chamadosLancados")
     public List<Chamado> chamadosLancados(){
+
         return this.chamadoRepository.chamadosLancados();
     }
 
     //CARD 30 - CHAMADOS QUITADOS
     @GetMapping("/chamadosQuitados")
     public List<Chamado> chamadosQuitados(){
+
         return this.chamadoRepository.chamadosQuitados();
     }
 
