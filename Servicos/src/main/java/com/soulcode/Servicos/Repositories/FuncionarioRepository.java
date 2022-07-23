@@ -17,7 +17,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
     
     @Query(value = "SELECT * FROM funcionario WHERE foto is null",nativeQuery = true )
     List<Object> findByFuncionarioSemFoto();
-   /* List<Funcionario> findByFotoNull(String foto);*/
+
 
 
 }
