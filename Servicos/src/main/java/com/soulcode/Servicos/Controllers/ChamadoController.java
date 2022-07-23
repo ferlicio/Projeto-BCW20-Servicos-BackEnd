@@ -62,28 +62,25 @@ public class ChamadoController {
         return chamados;
     }
 
-    // aqui vamos definir o endpoint para o serviço de cadastro de um novo chamado
-    // para cadastro precisamos anotar como método http - post
+
     @PostMapping("/chamados/{idCliente}")
     public ResponseEntity<Chamado> cadastrarChamado(@PathVariable Integer idCliente,
                                                     @RequestBody Chamado chamado){
         chamado = chamadoService.cadastrarChamado(chamado,idCliente);
-        //nesse momento o chamado já foi cadastrado no database
-        //precisamos agora criar o caminho (uri) para que esse novo chamado possa ser acessado
+
         URI novaUri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}")
                 .buildAndExpand(chamado.getIdChamado()).toUri();
         return ResponseEntity.created(novaUri).body(chamado);
     }
 
-    //vamos mapear o serviço de excluir um chamado
+
     @DeleteMapping("/chamados/{idChamado}")
        public ResponseEntity<Void> excluirChamado(@PathVariable Integer idChamado){
         chamadoService.excluirChamado(idChamado);
         return ResponseEntity.noContent().build();
     }
 
-    // vamos mapear o serviço de editar um chamado
-    // para edição precisamos do método http do tipo put
+
     @PutMapping("/chamados/{idChamado}")
     public ResponseEntity<Chamado> editarChamado(@PathVariable Integer idChamado,
                                                  @RequestBody Chamado chamado){
@@ -92,7 +89,7 @@ public class ChamadoController {
         return ResponseEntity.ok().build();
     }
 
-    //vamos fazer o mapeamento do método de atribuir um funcionario a um determinado chamado
+
     @PutMapping("/chamadosAtribuirFuncionario/{idChamado}/{idFuncionario}")
     public ResponseEntity<Chamado> atribuirFuncionario(@PathVariable Integer idChamado,
                                                        @PathVariable Integer idFuncionario){
@@ -100,7 +97,7 @@ public class ChamadoController {
         return ResponseEntity.noContent().build();
     }
 
-    //vamos construr o mapeamento do método para modificar o status de um chamado
+
     @PutMapping("/chamadosModificarStatus/{idChamado}")
     public ResponseEntity<Chamado> modificarStatus(@PathVariable Integer idChamado,
                                                    @RequestParam("status") String status){
@@ -109,21 +106,20 @@ public class ChamadoController {
     }
 
 
-    //CARD 29 - CHAMANDOS LANCADOS
+
     @GetMapping("/chamadosLancados")
     public List<Chamado> chamadosLancados(){
 
         return this.chamadoRepository.chamadosLancados();
     }
 
-    //CARD 30 - CHAMADOS QUITADOS
+
     @GetMapping("/chamadosQuitados")
     public List<Chamado> chamadosQuitados(){
 
         return this.chamadoRepository.chamadosQuitados();
     }
 
-    //CARD 26 - CHAMADO POR STATUS
 
     @GetMapping("/chamadosPorStatus")
     public List<Object> listaChamadoPorStatus () {
