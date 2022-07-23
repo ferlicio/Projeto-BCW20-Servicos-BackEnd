@@ -27,14 +27,17 @@ public interface ChamadoRepository extends JpaRepository<Chamado,Integer> {
             "FROM chamado\n" +
             "LEFT JOIN pagamento ON chamado.id_pagamento = pagamento.id_pagamento\n" +
             "WHERE pagamento.status_pagamento = \"LANCADO\"", nativeQuery = true)
-    List<Object> chamadosLancados();
+    List<Chamado> chamadosLancados();
 
     //Card 30
     @Query(value="SELECT chamado.*, pagamento.status_pagamento\n" +
             "FROM chamado\n" +
             "LEFT JOIN pagamento ON chamado.id_pagamento = pagamento.id_pagamento\n" +
             "WHERE pagamento.status_pagamento = \"QUITADO\"", nativeQuery = true)
-    List<Object> chamadosQuitados();
+    List<Chamado> chamadosQuitados();
 
+    //Card 26
+    @Query(value = "SELECT COUNT(status) as QUANTIDADE, chamado.status as STATUS_CHAMADO FROM chamado GROUP BY chamado.status", nativeQuery = true)
+    List<Object> listaChamadoPorStatus ();
 
 }
