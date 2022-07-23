@@ -12,19 +12,12 @@ import java.util.Optional;
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
 
     Optional<Funcionario> findByEmail(String email);
-    // Optional<Funcionario> findByNome
-
-    //Optional<Funcionario> findByNomeAndEmailAndFoto(String nome, String email, String foto);
+    
     List<Funcionario> findByCargo(Optional<Cargo> cargo);
-
+    
     @Query(value = "SELECT * FROM funcionario WHERE foto is null",nativeQuery = true )
     List<Object> findByFuncionarioSemFoto();
    /* List<Funcionario> findByFotoNull(String foto);*/
-
-
-
-
-
 
 
 }

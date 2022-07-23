@@ -1,6 +1,7 @@
 package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.Pagamento;
+import com.soulcode.Servicos.Repositories.PagamentoRepository;
 import com.soulcode.Servicos.Services.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ public class PagamentoController {
 
     @Autowired
     PagamentoService pagamentoService;
+    @Autowired
+    PagamentoRepository pagamentoRepository;
 
     @GetMapping("/pagamentos")
     public List<Pagamento> mostrarTodosPagamentos(){
@@ -64,6 +67,11 @@ public class PagamentoController {
                                                               @RequestParam("status") String status){
         pagamentoService.modificarStatusPagamento(idPagamento,status);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pagamentoPorStatus")
+    public List<Object> listaPagamentoPorStatus() {
+        return this.pagamentoRepository.listaPagamentoPorStatus();
     }
 
 
