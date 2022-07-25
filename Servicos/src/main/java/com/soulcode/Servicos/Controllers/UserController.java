@@ -1,7 +1,10 @@
 package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.User;
+import com.soulcode.Servicos.Repositories.UserRepository;
+import com.soulcode.Servicos.Security.JWTAuthorizationFilter;
 import com.soulcode.Servicos.Services.UserService;
+import com.soulcode.Servicos.Util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,12 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private JWTUtils jwtUtils;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,4 +40,14 @@ public class UserController {
         user = userService.cadastrar(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
+
+    @PutMapping("/usuarios/{loginUsuario}")
+    public ResponseEntity<User> alterarSenha(@PathVariable String loginUsuario, @RequestParam("password") String password, @RequestHeader ("Authorization") String headers){
+        String senhaUser = passwordEncoder.encode(password);
+        userService.alterarSenha(loginUsuario, senhaUser, headers);
+        return ResponseEntity.ok().build();
+    }
 }
+
+
+
