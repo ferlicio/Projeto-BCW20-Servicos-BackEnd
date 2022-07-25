@@ -47,6 +47,23 @@ public class FuncionarioController {
         return funcionarios;
     }
 
+    @GetMapping("/funcionarioSemFoto")
+    public List<Object> findByFuncionarioSemFoto(){
+
+        return this.funcionarioRepository.funcionarioSemFoto();
+    }
+
+
+    @GetMapping("/funcionarioSemChamado")
+    public List<Object> funcionarioSemChamado(){
+        return this.funcionarioRepository.funcionarioSemChamado();
+    }
+
+    @GetMapping("/qtdFuncionarioPeloCargo")
+    public List<Object> qtdFuncionarioPeloCargo(){
+        return this.funcionarioRepository.qtdFuncionarioPeloCargo();
+    }
+
 
     @PostMapping("/funcionarios/{idCargo}")
     public ResponseEntity<Funcionario> cadastrarFuncionario(@PathVariable Integer idCargo, @RequestBody Funcionario funcionario){
@@ -72,11 +89,6 @@ public class FuncionarioController {
     }
 
 
-@GetMapping("/funcionarioSemFoto")
-public List<Object> findByFuncionarioSemFoto(){
-
-    return this.funcionarioRepository.findByFuncionarioSemFoto();
-}
 
 
 
