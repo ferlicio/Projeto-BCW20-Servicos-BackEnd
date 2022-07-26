@@ -47,6 +47,12 @@ public class UserController {
         userService.alterarSenha(loginUsuario, senhaUser, headers);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("desabilitarConta/{loginUsuario}")
+    public ResponseEntity<User> desabilitarConta(@PathVariable String loginUsuario, @RequestHeader  ("Authorization") String headers){
+        userService.desabilitarConta(loginUsuario, headers);
+        return ResponseEntity.ok().build();
+    }
 }
 
 

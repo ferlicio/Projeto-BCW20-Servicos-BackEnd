@@ -11,9 +11,12 @@ public class AuthUserDetail implements UserDetails {
     private String login;
     private String password;
 
-    public AuthUserDetail(String login, String password) {
+    private boolean enabled;
+
+    public AuthUserDetail(String login, String password, boolean enabled) {
         this.login = login;
         this.password = password;
+        this.enabled = enabled;
     }
 
     @Override
@@ -48,6 +51,9 @@ public class AuthUserDetail implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        if (this.enabled) {
+            return true;
+        }
+        return false;
     }
 }
