@@ -41,4 +41,17 @@ public class UserService {
 
     }
 
-}
+    public User desabilitarConta(String login, String headers) {
+        if (headers.startsWith("Bearer") && headers != null) {
+            String email = jwtUtils.getLogin(headers.substring(7));
+            Optional<User> userToken = userRepository.findByLogin(email);
+
+            if (userToken.get().getLogin().equals(login)){
+            userToken.get().setEnabled(false);
+
+            return userRepository.save(userToken.get());}
+
+        }
+        throw new RuntimeException("ERRO! Tente novamente mais tarde");
+
+    }}
