@@ -2,6 +2,7 @@ package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.User;
 import com.soulcode.Servicos.Repositories.UserRepository;
+import com.soulcode.Servicos.Security.AuthorizationFilter;
 import com.soulcode.Servicos.Services.UserService;
 import com.soulcode.Servicos.Util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
