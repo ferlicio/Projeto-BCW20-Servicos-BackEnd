@@ -29,4 +29,5 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
             "GROUP BY funcionario.id_cargo", nativeQuery = true)
     List<Object> qtdFuncionarioPeloCargo();
 
+
 }

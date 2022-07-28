@@ -2,6 +2,7 @@ package com.soulcode.Servicos.Services;
 
 import com.soulcode.Servicos.Models.Cliente;
 import com.soulcode.Servicos.Repositories.ClienteRepository;
+import com.soulcode.Servicos.Services.Exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -20,6 +21,7 @@ public class ClienteService {
 
     @Cacheable("clientesCache")
     public List<Cliente> mostrarTodosClientes() {
+
         return clienteRepository.findAll();
     }
 
@@ -27,12 +29,13 @@ public class ClienteService {
     @Cacheable(value = "clientesCache", key = "#idCliente")
     public Cliente mostrarUmCliente(Integer idCliente) {
         Optional<Cliente> cliente = clienteRepository.findById(idCliente);
-        return cliente.orElseThrow();
+        return cliente.orElseThrow(
+                () -> new EntityNotFoundException("Cliente não cadastrado: " + idCliente)
+        );
     }
 
     @CachePut(value = "clientesCache", key = "#cliente.idCliente")
     public Cliente inserirCliente(Cliente cliente) {
-
         cliente.setIdCliente(null);
         return clienteRepository.save(cliente);
     }

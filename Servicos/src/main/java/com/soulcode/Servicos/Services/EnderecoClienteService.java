@@ -1,9 +1,11 @@
 package com.soulcode.Servicos.Services;
 
+import com.soulcode.Servicos.Controllers.Exceptions.StandardError;
 import com.soulcode.Servicos.Models.Cliente;
 import com.soulcode.Servicos.Models.EnderecoCliente;
 import com.soulcode.Servicos.Repositories.ClienteRepository;
 import com.soulcode.Servicos.Repositories.EnderecoClienteRepository;
+import com.soulcode.Servicos.Services.Exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +21,17 @@ public class EnderecoClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
+
     public List<EnderecoCliente> mostrarTodosEnderecosCliente(){
+
         return enderecoClienteRepository.findAll();
     }
 
     public EnderecoCliente mostrarUmEnderecoPeloId(Integer idEnderecoCli){
         Optional<EnderecoCliente> endereco = enderecoClienteRepository.findById(idEnderecoCli);
-        return endereco.orElseThrow();
+        return endereco.orElseThrow(
+                () -> new EntityNotFoundException("Endereço não cadastrado: " + idEnderecoCli)
+        );
     }
 
 
@@ -40,7 +46,7 @@ public class EnderecoClienteService {
             clienteRepository.save(cliente.get());
             return enderecoCliente;
         }else{
-            throw new Exception();
+          throw new Exception("Cliente não encontrado");
         }
     }
 

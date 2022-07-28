@@ -5,6 +5,7 @@ import com.soulcode.Servicos.Models.Pagamento;
 import com.soulcode.Servicos.Models.StatusPagamento;
 import com.soulcode.Servicos.Repositories.ChamadoRepository;
 import com.soulcode.Servicos.Repositories.PagamentoRepository;
+import com.soulcode.Servicos.Services.Exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,9 @@ public class PagamentoService {
 
     public Pagamento mostrarPagamentoPeloId(Integer idPagamento){
         Optional<Pagamento> pagamento = pagamentoRepository.findById(idPagamento);
-        return pagamento.orElseThrow();
+        return pagamento.orElseThrow(
+                () -> new EntityNotFoundException("Pagamento não cadastrado: " + idPagamento)
+        );
     }
 
     public List<Pagamento> mostrarPagamentosPeloStatus(String status){
@@ -45,7 +48,7 @@ public class PagamentoService {
             chamadoRepository.save(chamado.get());
             return pagamento;
         }else{
-            throw new RuntimeException();
+            throw new RuntimeException("Pagamento não encontrado");
         }
 
     }
