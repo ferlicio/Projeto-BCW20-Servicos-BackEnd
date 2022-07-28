@@ -29,5 +29,14 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
             "GROUP BY funcionario.id_cargo", nativeQuery = true)
     List<Object> qtdFuncionarioPeloCargo();
 
+    @Query(value="SELECT chamado.id_funcionario, SUM(pagamento.valor) as TOTAL\n" +
+            "            FROM pagamento\n" +
+            "            LEFT JOIN chamado\n" +
+            "            ON chamado.id_pagamento = pagamento.id_pagamento\n" +
+            "            WHERE pagamento.status_pagamento = \"CONCLUIDO\"\n" +
+            "            GROUP BY chamado.id_funcionario;", nativeQuery = true)
+    List<Object> totalPagoAoFuncionarioPorChamadoConcluido();
+
+
 
 }
