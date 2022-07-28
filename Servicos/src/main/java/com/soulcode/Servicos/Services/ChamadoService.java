@@ -70,11 +70,6 @@ public class ChamadoService {
 
     @CachePut(value = "chamadosCache", key = "#idCliente")
     public Chamado cadastrarChamado(Chamado chamado, Integer idCliente){
-
-        chamado.setStatus(StatusChamado.RECEBIDO);
-
-        chamado.setFuncionario(null);
-
         Optional<Cliente> cliente = clienteRepository.findById(idCliente);
         chamado.setCliente(cliente.get());
         return chamadoRepository.save(chamado);
