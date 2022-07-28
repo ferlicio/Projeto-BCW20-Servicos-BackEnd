@@ -2,9 +2,8 @@ package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.User;
 import com.soulcode.Servicos.Repositories.UserRepository;
-import com.soulcode.Servicos.Security.JWTAuthorizationFilter;
 import com.soulcode.Servicos.Services.UserService;
-import com.soulcode.Servicos.Util.JWTUtils;
+import com.soulcode.Servicos.Util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private JWTUtils jwtUtils;
+    private TokenUtils tokenUtils;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
