@@ -61,9 +61,18 @@ public class FuncionarioController {
     }
 
 
-   @GetMapping("/quantidadeFuncionariosPeloCargo")
+
+
+
+    @GetMapping("/quantidadeFuncionariosPeloCargo")
     public List<Object> qtdFuncionarioPeloCargo(){
         return this.funcionarioRepository.qtdFuncionarioPeloCargo();
+    }
+
+
+    @GetMapping("/totalPagoAoFuncionarioPorChamadoConcluido")
+    public List<Object> totalPagoAoFuncionarioPorChamadoConcluido(){
+        return this.funcionarioRepository.totalPagoAoFuncionarioPorChamadoConcluido();
     }
 
 

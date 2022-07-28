@@ -1,6 +1,7 @@
 package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.Cliente;
+import com.soulcode.Servicos.Repositories.ClienteRepository;
 import com.soulcode.Servicos.Services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
+    @Autowired
+    ClienteRepository clienteRepository;
+
     @GetMapping("/clientes")
     public List<Cliente> mostrarTodosCliente(){
         List<Cliente> clientes = clienteService.mostrarTodosClientes();
@@ -28,6 +32,12 @@ public class ClienteController {
         Cliente cliente = clienteService.mostrarUmCliente(idCliente);
         return ResponseEntity.ok().body(cliente);
     }
+
+    @GetMapping("/totalPagoPorClientePorChamadoConcluido")
+    public List<Object> totalPagoPorClientePorChamadoConcluido(){
+        return this.clienteRepository.totalPagoPorClientePorChamadoConcluido();
+    }
+
 
     @PostMapping("/clientes")
     public ResponseEntity<Cliente> inserirCliente(@RequestBody Cliente cliente) {
