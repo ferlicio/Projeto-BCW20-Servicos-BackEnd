@@ -47,19 +47,21 @@ public class FuncionarioController {
         return funcionarios;
     }
 
-    @GetMapping("/funcionarioSemFoto")
+
+    @GetMapping("/funcionariosSemFoto")
     public List<Object> findByFuncionarioSemFoto(){
 
         return this.funcionarioRepository.funcionarioSemFoto();
     }
 
 
-    @GetMapping("/funcionarioSemChamado")
+   @GetMapping("/funcionariosSemChamado")
     public List<Object> funcionarioSemChamado(){
         return this.funcionarioRepository.funcionarioSemChamado();
     }
 
-    @GetMapping("/qtdFuncionarioPeloCargo")
+
+   @GetMapping("/quantidadeFuncionariosPeloCargo")
     public List<Object> qtdFuncionarioPeloCargo(){
         return this.funcionarioRepository.qtdFuncionarioPeloCargo();
     }

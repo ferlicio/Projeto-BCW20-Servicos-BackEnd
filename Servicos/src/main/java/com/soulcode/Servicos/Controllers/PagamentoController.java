@@ -39,6 +39,7 @@ public class PagamentoController {
         return pagamentos;
     }
 
+
     @GetMapping("/pagamentosChamadosComCliente")
     public List<List> orcamentoComServicoCliente(){
         List<List> pagamentos = pagamentoService.orcamentoComServicoCliente();
@@ -62,15 +63,16 @@ public class PagamentoController {
         return ResponseEntity.ok().body(pagamento);
     }
 
-    @PutMapping("/pagamentosAlteracaoStatus/{idPagamento}")
+     @PutMapping("/pagamentosAlteraStatus/{idPagamento}")
     public ResponseEntity<Pagamento> modificarStatusPagamento(@PathVariable Integer idPagamento,
                                                               @RequestParam("status") String status){
         pagamentoService.modificarStatusPagamento(idPagamento,status);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/pagamentoPorStatus")
+    @GetMapping("/pagamentosPorStatus")
     public List<Object> listaPagamentoPorStatus() {
+
         return this.pagamentoRepository.listaPagamentoPorStatus();
     }
 
