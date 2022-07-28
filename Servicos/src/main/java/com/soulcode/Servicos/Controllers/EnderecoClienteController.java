@@ -25,7 +25,8 @@ public class EnderecoClienteController {
         return enderecos;
     }
 
-    @GetMapping("/enderecoCliente/{idEnderecoCli}")
+
+    @GetMapping("/enderecoCliente/{idEnderecoCliente}")
     public ResponseEntity<EnderecoCliente> mostrarUmEnderecoPeloId(@PathVariable Integer idEnderecoCli){
         EnderecoCliente enderecoCliente = enderecoClienteService.mostrarUmEnderecoPeloId(idEnderecoCli);
         return ResponseEntity.ok().body(enderecoCliente);
@@ -53,7 +54,5 @@ public class EnderecoClienteController {
         enderecoClienteService.editarEndereco(enderecoCliente);
         return ResponseEntity.ok().body(enderecoCliente);
     }
-
-
 
 }

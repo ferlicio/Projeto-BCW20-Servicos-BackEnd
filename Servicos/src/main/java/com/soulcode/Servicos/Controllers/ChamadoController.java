@@ -90,7 +90,7 @@ public class ChamadoController {
     }
 
 
-    @PutMapping("/chamadosAtribuirFuncionario/{idChamado}/{idFuncionario}")
+     @PutMapping("/chamadosFuncionario/{idChamado}/{idFuncionario}")
     public ResponseEntity<Chamado> atribuirFuncionario(@PathVariable Integer idChamado,
                                                        @PathVariable Integer idFuncionario){
         chamadoService.atribuirFuncionario(idChamado, idFuncionario);
@@ -98,13 +98,12 @@ public class ChamadoController {
     }
 
 
-    @PutMapping("/chamadosModificarStatus/{idChamado}")
+    @PutMapping("/chamadosStatus/{idChamado}")
     public ResponseEntity<Chamado> modificarStatus(@PathVariable Integer idChamado,
                                                    @RequestParam("status") String status){
         chamadoService.modificarStatus(idChamado,status);
         return ResponseEntity.noContent().build();
     }
-
 
 
     @GetMapping("/chamadosLancados")
@@ -119,7 +118,6 @@ public class ChamadoController {
 
         return this.chamadoRepository.chamadosQuitados();
     }
-
 
     @GetMapping("/chamadosPorStatus")
     public List<Object> listaChamadoPorStatus () {
