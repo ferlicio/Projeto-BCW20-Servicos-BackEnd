@@ -44,6 +44,7 @@ public class StandardError {
     }
 
     public void setMessage(String message) {
+
         this.message = message;
     }
 
@@ -54,4 +55,6 @@ public class StandardError {
     public void setPath(String path) {
         this.path = path;
     }
+
+
 }

@@ -34,7 +34,6 @@ public class FuncionarioService {
     }
 
 
-
     @Cacheable(value = "funcionariosCache", key = "#idFuncionario")
     public Funcionario mostrarUmFuncionarioPeloId(Integer idFuncionario)
     {
@@ -47,7 +46,9 @@ public class FuncionarioService {
     @Cacheable(value = "funcionariosCache", key = "#email")
     public Funcionario mostrarUmFuncionarioPeloEmail(String email){
         Optional<Funcionario> funcionario = funcionarioRepository.findByEmail(email);
-        return funcionario.orElseThrow();
+        return funcionario.orElseThrow(
+                () -> new EntityNotFoundException("Email do funcionário não cadastrado: " + email)
+        );
     }
 
     @Cacheable(value = "funcionariosCache", key = "#idCargo")
@@ -73,6 +74,7 @@ public class FuncionarioService {
 
     @CachePut(value = "funcioariosCache")
     public Funcionario editarFuncionario(Funcionario funcionario){
+
         return funcionarioRepository.save(funcionario);
     }
 

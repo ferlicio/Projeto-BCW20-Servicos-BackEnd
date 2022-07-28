@@ -2,6 +2,7 @@ package com.soulcode.Servicos.Services;
 
 import com.soulcode.Servicos.Models.Cargo;
 import com.soulcode.Servicos.Repositories.CargoRepository;
+import com.soulcode.Servicos.Services.Exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,9 @@ public class CargoService {
 
     public Cargo mostrarCargoPeloId(Integer idCargo){
         Optional<Cargo> cargo = cargoRepository.findById(idCargo);
-        return cargo.orElseThrow();
+        return cargo.orElseThrow(
+                () -> new EntityNotFoundException("Cargo não cadastrado: " + idCargo)
+        );
     }
 
     public Cargo cadastrarCargo(Cargo cargo){
@@ -33,10 +36,12 @@ public class CargoService {
     }
 
     public Cargo editarCargo(Cargo cargo){
+
         return cargoRepository.save(cargo);
     }
 
     public void excluirCargo(Integer idCargo){
+
         cargoRepository.deleteById(idCargo);
     }
 }
