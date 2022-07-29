@@ -12,7 +12,7 @@ public interface ClienteRepository  extends JpaRepository<Cliente,Integer> {
             "            FROM chamado\n" +
             "            LEFT JOIN pagamento\n" +
             "            ON chamado.id_pagamento = pagamento.id_pagamento\n" +
-            "            WHERE pagamento.status_pagamento = \"CONCLUIDO\"\n" +
+            "            WHERE pagamento.status_pagamento = \"QUITADO\"\n" +
             "            GROUP BY chamado.id_cliente", nativeQuery = true)
     List<Object> totalPagoPorClientePorChamadoConcluido();
 
