@@ -33,7 +33,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
             "            FROM pagamento\n" +
             "            LEFT JOIN chamado\n" +
             "            ON chamado.id_pagamento = pagamento.id_pagamento\n" +
-            "            WHERE pagamento.status_pagamento = \"CONCLUIDO\"\n" +
+            "            WHERE pagamento.status_pagamento = \"QUITADO\"\n" +
             "            GROUP BY chamado.id_funcionario;", nativeQuery = true)
     List<Object> totalPagoAoFuncionarioPorChamadoConcluido();
 
