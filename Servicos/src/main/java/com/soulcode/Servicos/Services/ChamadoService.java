@@ -85,11 +85,10 @@ public class ChamadoService {
     public Chamado editarChamado(Chamado chamado, Integer idChamado){
 
         Chamado chamadoSemAsNovasAlteracoes = mostrarUmChamado(idChamado);
-        Funcionario funcionario = chamadoSemAsNovasAlteracoes.getFuncionario();
         Cliente cliente = chamadoSemAsNovasAlteracoes.getCliente();
 
         chamado.setCliente(cliente);
-        chamado.setFuncionario(funcionario);
+
         return chamadoRepository.save(chamado);
     }
 
